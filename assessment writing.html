@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>PT Evaluation: Student Assessment Lab</title>
+    <style>
+        body { font-family: 'Times New Roman', Times, serif; line-height: 1.6; color: #1a1a1a; max-width: 1000px; margin: 20px auto; padding: 20px; background-color: #f0f2f5; }
+        h1, h2, h3 { color: #2c3e50; border-bottom: 2px solid #34495e; padding-bottom: 10px; }
+        .section { background: white; padding: 20px; margin-bottom: 20px; border-radius: 4px; border: 1px solid #dcdde1; }
+        .data-display { background: #f8f9fa; padding: 10px; border: 1px solid #e9ecef; margin-bottom: 10px; font-size: 0.95em; }
+        .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        label { font-weight: bold; display: block; margin-top: 15px; color: #2980b9; }
+        textarea { width: 100%; height: 100px; padding: 10px; margin-top: 5px; border: 2px solid #bdc3c7; border-radius: 4px; box-sizing: border-box; font-family: inherit; }
+        .feedback { font-size: 0.85em; margin-top: 5px; font-weight: bold; color: #c0392b; background: #fdf2f2; padding: 5px; border-radius: 3px; }
+        .valid { color: #27ae60; background: #f2fdf5; border: 1px solid #27ae60; }
+        .btn-reset { background-color: #7f8c8d; color: white; padding: 12px 24px; border: none; border-radius: 4px; cursor: pointer; font-weight: bold; margin-top: 20px; }
+        table { width: 100%; border-collapse: collapse; margin-top: 10px; background: white; }
+        th, td { border: 1px solid #ddd; padding: 10px; text-align: left; }
+        th { background-color: #34495e; color: white; }
+        .readonly-field { font-weight: normal; color: #444; }
+    </style>
+</head>
+<body>
+
+    <h1>Clinical Evaluation Lab: Total Knee Arthroplasty</h1>
+    <p><em>Instructions: Review the pre-populated Subjective and Objective data. Complete the Assessment section below. All essential items must be addressed for validation.</em></p>
+
+    <div class="section">
+        <h2>I. Reason for Referral (Subjective) [cite: 22, 23]</h2>
+        <div class="grid">
+            <div class="data-display">
+                <strong>Demographics[cite: 24]:</strong> Daniel; 68 y/o Male; Retired Architect; Medicare.<br>
+                <strong>Current Condition[cite: 25]:</strong> S/P R TKA (01/15/2026) via Dr. Smith (Ortho).<br>
+                <strong>Symptoms[cite: 27, 29, 33]:</strong> R Knee pain; Sharp (7/10) with gait, Dull (3/10) rest.
+            </div>
+            <div class="data-display">
+                <strong>Meds[cite: 35, 36]:</strong> Oxycodone (Analgesic), Celebrex (NSAID), ASA (Antiplatelet).<br>
+                <strong>PMHx[cite: 39]:</strong> HTN, Type II DM, GERD.<br>
+                <strong>PLOF[cite: 45]:</strong> Independent (Indep) with all ADLs and community mobility.
+            </div>
+        </div>
+        <div class="data-display">
+            <strong>Social Hx/CLOF[cite: 43, 44]:</strong> Lives in 2-story home with spouse; laundry in basement. Restricted in household ADLs and mobility.
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>II. Objective (Tests & Measures) [cite: 47, 48]</h2>
+        
+        <h3>Activity Performance (Assistance Levels) [cite: 50, 51]</h3>
+        <table>
+            <tr><th>Activity</th><th>Assistance Level</th><th>Equipment/Notes</th></tr>
+            <tr><td>Bed Mobility</td><td>Modified Independent</td><td>Requires log roll [cite: 52]</td></tr>
+            <tr><td>Transfers</td><td>Standby Supervision (SBA)</td><td>Sit-to-stand from elevated chair [cite: 52]</td></tr>
+            <tr><td>Ambulation</td><td>Minimal Assist (Min A)</td><td>50 ft with FWW [cite: 52]</td></tr>
+            <tr><td>Stairs</td><td>Moderate Assist (Mod A)</td><td>4 steps; 1 handrail; non-reciprocal [cite: 52]</td></tr>
+        </table>
+
+        <h3>Impairment Level Tests [cite: 57, 61]</h3>
+        <div class="grid">
+            <div class="data-display">
+                <strong>Cardiovascular[cite: 70]:</strong> BP 132/84 | HR 78 | RR 16 | SpO2 98%<br>
+                <strong>Integumentary[cite: 73]:</strong> 44cm Circumference (6cm > L); Incision intact.
+            </div>
+            <div class="data-display">
+                <strong>Musculoskeletal[cite: 75, 77]:</strong> PROM: 5°-85°; AROM: 10°-75°; MMT: R Quad 3-/5.<br>
+                <strong>Neuro/Cognitive[cite: 64, 67]:</strong> AOX4; Sensation/Proprioception Intact.
+            </div>
+        </div>
+    </div>
+
+    <form id="ptForm">
+        <div class="section" style="border: 2px solid #2980b9;">
+            <h2>III. Assessment (Student Entry) </h2>
+            
+            <label>1. Summary </label>
+            <textarea id="summary" oninput="validate()" placeholder="Synthesize age, setting, MD referral, and ICD-10..."></textarea>
+            <div id="v-summary" class="feedback">✕ Missing: Age, Setting, or ICD-10 (M17.11)</div>
+
+            <label>2. PT Diagnosis </label>
+            <textarea id="ptDx" oninput="validate()" placeholder="Pt has [Med Dx] consistent with these PT impairments... leading to functional deficits..."></textarea>
+            <div id="v-ptDx" class="feedback">✕ Missing: Link Medical Dx to specific Impairments and Deficits</div>
+
+            <label>3. Problem List [cite: 86-90]</label>
+            <textarea id="problems" oninput="validate()" placeholder="1) Participation, 2) Activity, 3) Impairments..."></textarea>
+            <div id="v-problems" class="feedback">✕ Missing: Prioritized list (Participation first)</div>
+
+            <label>4. Prognosis & Plan [cite: 91-94]</label>
+            <textarea id="prognosis" oninput="validate()" placeholder="Prognosis level; contributing factors; # of sessions; DC plan..."></textarea>
+            <div id="v-prognosis" class="feedback">✕ Missing: Prognosis (Good/Fair/Poor), Frequency, and DC Plan</div>
+        </div>
+
+        <button type="button" class="btn-reset" onclick="resetAssessment()">RESET ASSESSMENT ONLY</button>
+    </form>
+
+    <script>
+        function validate() {
+            const checks = {
+                summary: [/68|sixty-eight/i, /outpatient/i, /M17\.11/i],
+                ptDx: [/consistent/i, /impairment/i, /deficit|limitation/i],
+                problems: [/1\)/, /2\)/, /3\)/],
+                prognosis: [/prognosis/i, /Good|Fair|Poor/i, /sessions/i, /DC|discharge/i]
+            };
+
+            for (let id in checks) {
+                let val = document.getElementById(id).value;
+                let feedback = document.getElementById('v-' + id);
+                let passed = checks[id].every(regex => regex.test(val));
+
+                if (val.length > 5 && passed) {
+                    feedback.innerHTML = "✓ Requirement Met";
+                    feedback.className = "feedback valid";
+                } else {
+                    feedback.className = "feedback";
+                    if(id === 'summary') feedback.innerHTML = "✕ Missing: Age (68), Setting (Outpatient), or ICD-10 (M17.11)";
+                    if(id === 'ptDx') feedback.innerHTML = "✕ Missing: Link Medical Dx (TKA) to specific Impairments (ROM/Strength) and Deficits (Gait)";
+                    if(id === 'problems') feedback.innerHTML = "✕ Missing: Use numbered list: 1) Participation (Work/Home), 2) Activity, 3) Impairment";
+                    if(id === 'prognosis') feedback.innerHTML = "✕ Missing: State Prognosis, total sessions required, and DC plan";
+                }
+            }
+        }
+
+        function resetAssessment() {
+            if (confirm("Clear only your assessment entries?")) {
+                document.getElementById("ptForm").reset();
+                validate();
+            }
+        }
+        window.onload = validate;
+    </script>
+</body>
+</html>
